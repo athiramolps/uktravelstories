@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>.hero-bg{
+background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1600&q=85&fit=crop');
+}
 <meta charset="UTF-8"/>
 <meta name="description" content="UK Travel Stories is an independent travel journal exploring Britain's most iconic destinations — from the Tower of London to the Scottish Highlands. In-depth stories, photography, and practical travel guides."/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UK Travel Stories | Discover Britain's Best Destinations</title>
-  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&q=80&fit=crop" fetchpriority="high"/>
+  <link rel="preload" as="image" href="./tower.webp" fetchpriority="high"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap"
@@ -52,7 +54,9 @@
 
     /* ── HERO ── */
     .hero{height:100vh;min-height:680px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;}
-    .hero-bg{position:absolute;inset:0;background-image:url('https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1600&q=85&fit=crop');background-size:cover;background-position:center;animation:hzoom 20s ease-in-out infinite alternate;}
+    .hero-bg{
+background-image:url('./tower.webp');
+}
     @keyframes hzoom{from{transform:scale(1.04);}to{transform:scale(1.12);}}
     .hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,31,53,.28) 0%,rgba(13,31,53,.55) 50%,rgba(13,31,53,.82) 100%);}
     .hero-content{position:relative;z-index:2;max-width:800px;padding:0 24px;}
@@ -405,7 +409,7 @@
     <!-- Stonehenge -->
     <article class="blog-card" onclick="openArticle(2)">
       <div class="c-img-wrap">
-        <img src="https://images.unsplash.com/photo-1599833975787-5c143f373c30?w=700&q=80&fit=crop" alt="Stonehenge" class="c-img" loading="lazy"/>
+        <img src="./stone.webp" alt="Stonehenge" class="c-img" loading="lazy">
         <span class="c-badge">🌀 Ancient Wonder</span>
         <span class="c-num">03 / 05</span>
       </div>
@@ -422,7 +426,7 @@
     <!-- Lake District -->
     <article class="blog-card" onclick="openArticle(3)">
       <div class="c-img-wrap">
-        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80&fit=crop" alt="Lake District" class="c-img" loading="lazy"/>
+        <img src="./lake.webp" alt="Lake District" class="c-img" loading="lazy">
         <span class="c-badge">⛰️ Natural Beauty</span>
         <span class="c-num">04 / 05</span>
       </div>
@@ -547,7 +551,7 @@ const DATA = [
   {
     title:"The Tower of London: A Fortress at the Heart of History",
     cat:"🏰 Historic Landmark", loc:"📍 London, England", time:"8 min read",
-    hero:"https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1400&q=85&fit=crop",
+    hero:"./tower.webp",
     tags:["London","History","Medieval","Crown Jewels","UNESCO","Beefeaters"],
     gallery:[
       {src:"https://images.unsplash.com/photo-1529655683826-aba9b3e77383?w=1000&q=85&fit=crop",cap:"The White Tower — William the Conqueror's formidable Norman keep, built in 1078"},
