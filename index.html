@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+<meta charset="UTF-8"/>
+<meta name="description" content="UK Travel Stories is an independent travel journal exploring Britain's most iconic destinations — from the Tower of London to the Scottish Highlands. In-depth stories, photography, and practical travel guides."/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>UK Travel Stories | Discover Britain's Best Destinations</title>
+  <link rel="preload" as="image" href="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?w=1200&q=80&fit=crop" fetchpriority="high"/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=DM+Sans:wght@300;400;500;600&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+</noscript>
   <style>
     :root {
       --navy:      #0d1f35;
       --cream:     #faf7f2;
       --parchment: #f0ebe0;
       --terra:     #bf5b38;
+      --terra-dk:  #9e3d1e;
       --gold:      #c99a4b;
       --ink:       #1e1e1e;
       --ink-mid:   #4a4a4a;
@@ -40,8 +47,8 @@
     .nav-links{display:flex;list-style:none;gap:4px;align-items:center;}
     .nav-links a{text-decoration:none;color:var(--ink-mid);font-size:.87rem;font-weight:500;padding:7px 15px;border-radius:6px;transition:.2s;cursor:pointer;}
     .nav-links a:hover{color:var(--navy);background:var(--parchment);}
-    .nav-cta{background:var(--terra)!important;color:#fff!important;border-radius:6px!important;margin-left:6px;}
-    .nav-cta:hover{background:#a84e30!important;}
+    .nav-cta{background:var(--terra-dk)!important;color:#fff!important;border-radius:6px!important;margin-left:6px;}
+    .nav-cta:hover{background:#7d2e0f!important;}
 
     /* ── HERO ── */
     .hero{height:100vh;min-height:680px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;}
@@ -54,8 +61,8 @@
     .hero-title em{font-style:italic;color:var(--gold);}
     .hero-sub{font-family:'Lora',serif;font-size:clamp(1rem,2vw,1.22rem);color:rgba(255,255,255,.82);font-style:italic;margin-bottom:42px;line-height:1.7;animation:fup .9s .28s var(--ease) both;}
     .hero-acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fup .9s .4s var(--ease) both;}
-    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.93rem;border:2px solid var(--terra);transition:.25s var(--ease);cursor:pointer;}
-    .btn-p:hover{background:#a84e30;border-color:#a84e30;transform:translateY(-2px);box-shadow:0 8px 28px rgba(191,91,56,.45);}
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra-dk);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.93rem;border:2px solid var(--terra-dk);transition:.25s var(--ease);cursor:pointer;}
+    .btn-p:hover{background:#7d2e0f;border-color:#7d2e0f;transform:translateY(-2px);box-shadow:0 8px 28px rgba(191,91,56,.45);}
     .btn-g{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:500;font-size:.93rem;border:2px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);transition:.25s;cursor:pointer;}
     .btn-g:hover{background:rgba(255,255,255,.22);}
     .hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fup 1s .8s var(--ease) both;}
@@ -71,7 +78,7 @@
     /* ── BLOG INDEX ── */
     #blog-index{padding:80px 48px 100px;max-width:1280px;margin:0 auto;}
     .idx-hdr{margin-bottom:52px;max-width:640px;}
-    .tag-pill{display:inline-block;background:var(--parchment);border:1px solid var(--border);color:var(--terra);font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;padding:5px 14px;border-radius:4px;margin-bottom:16px;}
+    .tag-pill{display:inline-block;background:var(--parchment);border:1px solid var(--border);color:var(--navy);font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;padding:5px 14px;border-radius:4px;margin-bottom:16px;}
     .idx-hdr h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700;color:var(--navy);line-height:1.15;letter-spacing:-.5px;margin-bottom:14px;}
     .idx-hdr p{font-family:'Lora',serif;font-size:1.05rem;color:var(--ink-mid);font-style:italic;line-height:1.7;}
     .sec-lbl{display:flex;align-items:center;gap:16px;margin-bottom:36px;}
@@ -229,7 +236,7 @@
     .about-feats{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
     .fc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:20px;}
     .fc .fi{font-size:1.5rem;margin-bottom:10px;display:block;}
-    .fc h4{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:#fff;margin-bottom:6px;}
+    .fc h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:#fff;margin-bottom:6px;}
     .fc p{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.5;}
 
     /* ── CONTACT ── */
@@ -307,7 +314,7 @@
     <div class="brand-text">UK Travel Stories<span class="brand-sub">Discover Britain</span></div>
   </div>
   <ul class="nav-links">
-    <li><a onclick="closeArticle();window.scrollTo({top:0,behavior:'smooth'})">Home</a></li>
+    <li><a href="#" onclick="closeArticle();window.scrollTo({top:0,behavior:'smooth'});return false;">Home</a></li>
     <li><a href="#blog-index" onclick="closeArticle()">Stories</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#contact" class="nav-cta">Contact Us</a></li>
@@ -432,7 +439,7 @@
     <!-- Bath -->
     <article class="blog-card" onclick="openArticle(4)">
       <div class="c-img-wrap">
-        <img src="https://images.unsplash.com/photo-1569336415962-a4bd9f69ce07?w=700&q=80&fit=crop" alt="Bath" class="c-img" loading="lazy"/>
+        <img src="https://images.unsplash.com/photo-1521106581851-da5b6457f674?w=700&q=80&fit=crop" alt="Bath" class="c-img" loading="lazy"/>
         <span class="c-badge">🏛️ Georgian Elegance</span>
         <span class="c-num">05 / 05</span>
       </div>
@@ -457,10 +464,10 @@
       <p>UK Travel Stories is an independent travel journal dedicated to capturing the spirit of the British Isles — from ancient stone circles to Georgian crescents, from highland lochs to royal fortresses. Every place has a story that deserves to be told with care, depth, and genuine wonder.</p>
     </div>
     <div class="about-feats">
-      <div class="fc"><span class="fi">🗺️</span><h4>Curated Destinations</h4><p>Handpicked locations blending history, nature, and cultural richness.</p></div>
-      <div class="fc"><span class="fi">✍️</span><h4>In-Depth Writing</h4><p>Long-form stories that go beyond the tourist brochure.</p></div>
-      <div class="fc"><span class="fi">📸</span><h4>Visual Storytelling</h4><p>Five curated photographs per destination, from different angles.</p></div>
-      <div class="fc"><span class="fi">🧭</span><h4>Practical Guidance</h4><p>Real visitor tips so you can plan your own adventure.</p></div>
+      <div class="fc"><span class="fi">🗺️</span><h3>Curated Destinations</h3><p>Handpicked locations blending history, nature, and cultural richness.</p></div>
+      <div class="fc"><span class="fi">✍️</span><h3>In-Depth Writing</h3><p>Long-form stories that go beyond the tourist brochure.</p></div>
+      <div class="fc"><span class="fi">📸</span><h3>Visual Storytelling</h3><p>Five curated photographs per destination, from different angles.</p></div>
+      <div class="fc"><span class="fi">🧭</span><h3>Practical Guidance</h3><p>Real visitor tips so you can plan your own adventure.</p></div>
     </div>
   </div>
 </section>
@@ -668,7 +675,7 @@ const DATA = [
   {
     title:"Bath: Where Roman History Meets Georgian Splendour",
     cat:"🏛️ Georgian Elegance", loc:"📍 Bath, Somerset", time:"7 min read",
-    hero:"https://images.unsplash.com/photo-1569336415962-a4bd9f69ce07?w=1400&q=85&fit=crop",
+    hero:"https://images.unsplash.com/photo-1521106581851-da5b6457f674?w=1400&q=85&fit=crop",
     tags:["Bath","Somerset","Roman","Georgian","Jane Austen","UNESCO","Spa"],
     gallery:[
       {src:"https://images.unsplash.com/photo-1575652007071-0ee2a1cf4e5d?w=1000&q=85&fit=crop",cap:"The Great Bath — still fed by the same sacred spring that flowed here 2,000 years ago"},
@@ -734,7 +741,8 @@ function openArticle(i) {
   document.getElementById('artBody').innerHTML = a.body + `<div class="art-tags">${tags}</div>`;
 
   const ov = document.getElementById('artOv');
-  ov.classList.add('open'); ov.scrollTop = 0;
+  ov.scrollTop = 0;
+  ov.classList.add('open');
   document.body.style.overflow = 'hidden';
 
   const bt = document.getElementById('barTitle');
