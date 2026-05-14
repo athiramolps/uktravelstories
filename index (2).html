@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="description" content="UK Travel Stories is an independent travel journal exploring Britain's most iconic destinations — from the Tower of London to the Scottish Highlands. In-depth stories, photography, and practical travel guides."/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>UK Travel Stories | Discover Britain's Best Destinations</title>
+  <link rel="preload" as="image" href="./tower.webp" fetchpriority="high"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap"
+      rel="stylesheet" media="print" onload="this.media='all'"/>
+<noscript>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;600&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+</noscript>
+  <style>
+    :root {
+      --navy:      #0d1f35;
+      --cream:     #faf7f2;
+      --parchment: #f0ebe0;
+      --terra:     #bf5b38;
+      --terra-dk:  #9e3d1e;
+      --gold:      #c99a4b;
+      --ink:       #1e1e1e;
+      --ink-mid:   #4a4a4a;
+      --ink-lt:    #7a7572;
+      --border:    #ddd8ce;
+      --white:     #ffffff;
+      --sh-sm:     0 2px 12px rgba(0,0,0,.07);
+      --sh-md:     0 8px 32px rgba(0,0,0,.13);
+      --ease:      cubic-bezier(.22,1,.36,1);
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+    ::-webkit-scrollbar{width:5px;}
+    ::-webkit-scrollbar-track{background:var(--parchment);}
+    ::-webkit-scrollbar-thumb{background:var(--terra);border-radius:3px;}
+
+    /* ── NAVBAR ── */
+    .navbar{position:fixed;top:0;left:0;right:0;z-index:900;padding:0 40px;height:66px;display:flex;align-items:center;justify-content:space-between;background:rgba(250,247,242,.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:box-shadow .3s;}
+    .navbar.scrolled{box-shadow:var(--sh-sm);}
+    .nav-brand{display:flex;align-items:center;gap:10px;cursor:pointer;}
+    .brand-icon{width:36px;height:36px;background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:1.1rem;flex-shrink:0;}
+    .brand-text{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--navy);line-height:1.1;}
+    .brand-sub{font-size:.6rem;font-family:'DM Sans',sans-serif;color:var(--ink-lt);letter-spacing:2px;text-transform:uppercase;display:block;}
+    .nav-links{display:flex;list-style:none;gap:4px;align-items:center;}
+    .nav-links a{text-decoration:none;color:var(--ink-mid);font-size:.87rem;font-weight:500;padding:7px 15px;border-radius:6px;transition:.2s;cursor:pointer;}
+    .nav-links a:hover{color:var(--navy);background:var(--parchment);}
+    .nav-cta{background:var(--terra-dk)!important;color:#fff!important;border-radius:6px!important;margin-left:6px;}
+    .nav-cta:hover{background:#7d2e0f!important;}
+
+    /* ── HERO ── */
+    .hero{height:100vh;min-height:680px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;text-align:center;}
+    .hero-bg{position:absolute;inset:0;background-image:url('./tower.webp');background-size:cover;background-position:center;will-change:transform;animation:hzoom 20s ease-in-out infinite alternate;}
+    @keyframes hzoom{from{transform:scale(1.04);}to{transform:scale(1.12);}}
+    .hero-ov{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(13,31,53,.28) 0%,rgba(13,31,53,.55) 50%,rgba(13,31,53,.82) 100%);}
+    .hero-content{position:relative;z-index:2;max-width:800px;padding:0 24px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);backdrop-filter:blur(8px);color:#e8d9c0;padding:6px 20px;border-radius:50px;font-size:.73rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:500;margin-bottom:28px;animation:fup .9s var(--ease) both;}
+    .hero-title{font-family:'Playfair Display',serif;font-size:clamp(3rem,7vw,5.5rem);font-weight:900;color:#fff;line-height:1.08;letter-spacing:-1.5px;margin-bottom:22px;animation:fup .9s .15s var(--ease) both;}
+    .hero-title em{font-style:italic;color:var(--gold);}
+    .hero-sub{font-family:'Lora',serif;font-size:clamp(1rem,2vw,1.22rem);color:rgba(255,255,255,.82);font-style:italic;margin-bottom:42px;line-height:1.7;animation:fup .9s .28s var(--ease) both;}
+    .hero-acts{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fup .9s .4s var(--ease) both;}
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--terra-dk);color:#fff;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:600;font-size:.93rem;border:2px solid var(--terra-dk);transition:.25s var(--ease);cursor:pointer;}
+    .btn-p:hover{background:#7d2e0f;border-color:#7d2e0f;transform:translateY(-2px);box-shadow:0 8px 28px rgba(191,91,56,.45);}
+    .btn-g{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.12);color:#fff;padding:14px 28px;border-radius:8px;text-decoration:none;font-weight:500;font-size:.93rem;border:2px solid rgba(255,255,255,.28);backdrop-filter:blur(6px);transition:.25s;cursor:pointer;}
+    .btn-g:hover{background:rgba(255,255,255,.22);}
+    .hero-scroll{position:absolute;bottom:28px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.68rem;letter-spacing:2px;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;gap:8px;animation:fup 1s .8s var(--ease) both;}
+    .scroll-line{width:1px;height:38px;background:linear-gradient(to bottom,rgba(255,255,255,.5),transparent);animation:pulse 1.8s ease-in-out infinite;}
+    @keyframes pulse{0%,100%{opacity:.35;}50%{opacity:1;}}
+    .hero-stats{position:absolute;bottom:0;left:0;right:0;display:flex;justify-content:center;background:rgba(13,31,53,.86);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.1);}
+    .hstat{padding:18px 44px;text-align:center;border-right:1px solid rgba(255,255,255,.1);}
+    .hstat:last-child{border-right:none;}
+    .snum{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--gold);display:block;}
+    .slbl{font-size:.68rem;color:rgba(255,255,255,.5);letter-spacing:1.8px;text-transform:uppercase;}
+    @keyframes fup{from{opacity:1;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+
+    /* ── BLOG INDEX ── */
+    #blog-index{padding:80px 48px 100px;max-width:1280px;margin:0 auto;}
+    .idx-hdr{margin-bottom:52px;max-width:640px;}
+    .tag-pill{display:inline-block;background:var(--parchment);border:1px solid var(--border);color:var(--navy);font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;padding:5px 14px;border-radius:4px;margin-bottom:16px;}
+    .idx-hdr h2{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.2rem);font-weight:700;color:var(--navy);line-height:1.15;letter-spacing:-.5px;margin-bottom:14px;}
+    .idx-hdr p{font-family:'Lora',serif;font-size:1.05rem;color:var(--ink-mid);font-style:italic;line-height:1.7;}
+    .sec-lbl{display:flex;align-items:center;gap:16px;margin-bottom:36px;}
+    .sec-lbl::before,.sec-lbl::after{content:'';flex:1;height:1px;background:var(--border);}
+    .sec-lbl span{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--ink-lt);font-weight:500;white-space:nowrap;}
+
+    /* ── MAGAZINE LAYOUT ── */
+    /* Row 1: featured hero card full width */
+    .featured-card{
+      position:relative;
+      border-radius:16px;
+      overflow:hidden;
+      height:480px;
+      cursor:pointer;
+      margin-bottom:24px;
+      box-shadow:var(--sh-md);
+    }
+    .featured-card .f-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--ease);}
+    .featured-card:hover .f-img{transform:scale(1.04);}
+    .featured-card .f-overlay{
+      position:absolute;inset:0;
+      background:linear-gradient(to top, rgba(8,18,32,.92) 0%, rgba(8,18,32,.5) 45%, rgba(8,18,32,.08) 100%);
+      transition:background .3s;
+    }
+    .featured-card:hover .f-overlay{background:linear-gradient(to top, rgba(8,18,32,.95) 0%, rgba(8,18,32,.55) 45%, rgba(8,18,32,.1) 100%);}
+    .f-badge-row{position:absolute;top:24px;left:28px;right:28px;display:flex;justify-content:space-between;align-items:center;}
+    .f-badge{background:var(--terra);color:#fff;font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;padding:6px 14px;border-radius:5px;}
+    .f-num{background:rgba(255,255,255,.15);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.8);font-size:.62rem;letter-spacing:1.5px;padding:5px 12px;border-radius:5px;font-weight:500;}
+    .f-content{position:absolute;bottom:0;left:0;right:0;padding:36px 40px 38px;}
+    .f-meta{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+    .f-meta span{font-size:.75rem;color:rgba(255,255,255,.65);letter-spacing:.3px;}
+    .f-dot{width:3px;height:3px;border-radius:50%;background:rgba(255,255,255,.35);}
+    .f-title{font-family:'Playfair Display',serif;font-size:clamp(1.6rem,2.8vw,2.3rem);font-weight:800;color:#fff;line-height:1.18;letter-spacing:-.4px;margin-bottom:14px;max-width:780px;}
+    .f-excerpt{font-family:'Lora',serif;font-size:.98rem;color:rgba(255,255,255,.75);line-height:1.65;margin-bottom:22px;max-width:680px;font-style:italic;}
+    .f-footer{display:flex;align-items:center;justify-content:space-between;}
+    .f-read{display:inline-flex;align-items:center;gap:8px;background:var(--terra);color:#fff;padding:10px 22px;border-radius:7px;font-size:.78rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase;transition:.25s var(--ease);}
+    .featured-card:hover .f-read{background:#a84e30;transform:translateX(3px);}
+    .f-loc{font-size:.78rem;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:5px;}
+
+    /* Row 2: 4-column grid of equal cards */
+    .cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;}
+    .blog-card{
+      background:var(--white);
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid var(--border);
+      box-shadow:var(--sh-sm);
+      cursor:pointer;
+      transition:transform .35s var(--ease),box-shadow .35s var(--ease);
+      display:flex;flex-direction:column;
+    }
+    .blog-card:hover{transform:translateY(-6px);box-shadow:var(--sh-md);}
+    .blog-card:hover .c-img{transform:scale(1.06);}
+    .blog-card:hover .c-title{color:var(--terra);}
+    .blog-card:hover .rarr{transform:translate(4px,-4px);}
+
+    /* Card image */
+    .c-img-wrap{overflow:hidden;position:relative;height:200px;}
+    .c-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .55s var(--ease);}
+    .c-badge{position:absolute;top:12px;left:12px;background:var(--navy);color:#e8d9c0;font-size:.58rem;letter-spacing:2px;text-transform:uppercase;font-weight:600;padding:4px 10px;border-radius:4px;}
+    .c-num{position:absolute;top:12px;right:12px;background:rgba(13,31,53,.65);color:rgba(255,255,255,.75);font-size:.58rem;letter-spacing:1.5px;padding:4px 9px;border-radius:4px;font-weight:500;}
+
+    /* Card body */
+    .c-body{padding:18px 20px 20px;flex:1;display:flex;flex-direction:column;}
+    .c-meta{display:flex;align-items:center;gap:7px;font-size:.68rem;color:var(--ink-lt);margin-bottom:9px;flex-wrap:wrap;}
+    .dot{width:3px;height:3px;border-radius:50%;background:var(--border);flex-shrink:0;}
+    .c-title{font-family:'Playfair Display',serif;color:var(--navy);font-weight:700;font-size:1.08rem;line-height:1.28;margin-bottom:auto;transition:color .2s;padding-bottom:14px;}
+    .c-foot{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--border);}
+    .read-more{display:flex;align-items:center;gap:5px;font-size:.72rem;font-weight:700;color:var(--terra);letter-spacing:.6px;text-transform:uppercase;}
+    .rarr{display:inline-block;transition:transform .25s var(--ease);}
+    .c-loc{font-size:.7rem;color:var(--ink-lt);}
+
+    /* ── ARTICLE OVERLAY ── */
+    .art-ov{position:fixed;inset:0;z-index:1000;background:var(--cream);overflow-y:auto;opacity:0;pointer-events:none;transform:translateY(36px);transition:opacity .4s var(--ease),transform .45s var(--ease);}
+    .art-ov.open{opacity:1;pointer-events:auto;transform:translateY(0);}
+
+    /* topbar */
+    .art-bar{position:sticky;top:0;z-index:10;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:rgba(250,247,242,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+    .back-btn{display:flex;align-items:center;gap:8px;background:none;border:none;font-family:'DM Sans',sans-serif;font-size:.84rem;font-weight:500;color:var(--ink-mid);cursor:pointer;padding:8px 14px;border-radius:6px;transition:.2s;}
+    .back-btn:hover{background:var(--parchment);color:var(--navy);}
+    .back-btn svg{transition:transform .2s;}
+    .back-btn:hover svg{transform:translateX(-3px);}
+    .bar-title{font-family:'Playfair Display',serif;font-size:.92rem;color:var(--navy);font-weight:600;opacity:0;transition:opacity .3s;max-width:380px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;}
+    .bar-title.vis{opacity:1;}
+    .bar-right{display:flex;gap:8px;align-items:center;}
+    .nav-btn{display:flex;align-items:center;gap:5px;background:var(--parchment);border:1px solid var(--border);font-family:'DM Sans',sans-serif;font-size:.74rem;font-weight:600;color:var(--ink-mid);cursor:pointer;padding:6px 13px;border-radius:6px;transition:.2s;}
+    .nav-btn:hover:not(:disabled){background:var(--navy);color:#fff;border-color:var(--navy);}
+    .nav-btn:disabled{opacity:.3;cursor:default;}
+    .share-btn{width:32px;height:32px;border-radius:6px;background:var(--parchment);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:.85rem;transition:.2s;}
+    .share-btn:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+    /* article hero */
+    .art-hero{position:relative;height:clamp(380px,52vh,560px);overflow:hidden;}
+    .art-hi{width:100%;height:100%;object-fit:cover;display:block;}
+    .art-ho{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,31,53,.88) 0%,rgba(13,31,53,.18) 55%,transparent 100%);}
+    .art-ht{position:absolute;bottom:0;left:0;right:0;padding:36px 60px 46px;max-width:900px;}
+    .art-cat{display:inline-block;background:var(--terra);color:#fff;font-size:.65rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:600;padding:5px 14px;border-radius:4px;margin-bottom:16px;}
+    .art-title{font-family:'Playfair Display',serif;font-size:clamp(1.9rem,4.5vw,3.2rem);font-weight:900;color:#fff;line-height:1.1;letter-spacing:-1px;margin-bottom:14px;}
+    .art-byline{display:flex;align-items:center;gap:14px;color:rgba(255,255,255,.72);font-size:.8rem;}
+    .sep{width:1px;height:12px;background:rgba(255,255,255,.28);}
+
+    /* ── PHOTO GALLERY ── */
+    .gallery-sec{max-width:1100px;margin:0 auto;padding:52px 32px 8px;}
+    .gal-head{font-family:'Playfair Display',serif;font-size:1.55rem;color:var(--navy);font-weight:700;margin-bottom:4px;}
+    .gal-sub{font-family:'Lora',serif;font-style:italic;color:var(--ink-lt);font-size:.88rem;margin-bottom:22px;}
+
+    /* 5-image mosaic: top row 3 cols × 260px, bottom row 2 cols × 200px */
+    .mosaic{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    .m-cell{overflow:hidden;border-radius:10px;cursor:pointer;}
+    .m-cell:nth-child(1){grid-column:1;grid-row:1;height:260px;}
+    .m-cell:nth-child(2){grid-column:2;grid-row:1;height:260px;}
+    .m-cell:nth-child(3){grid-column:3;grid-row:1/3;height:100%;}  /* tall spanning cell */
+    .m-cell:nth-child(4){grid-column:1;grid-row:2;height:200px;}
+    .m-cell:nth-child(5){grid-column:2;grid-row:2;height:200px;}
+    .m-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s var(--ease),filter .3s;}
+    .m-cell:hover .m-img{transform:scale(1.05);filter:brightness(1.08);}
+    .m-cell:nth-child(3){height:470px;}
+    .gal-cap{font-size:.72rem;color:var(--ink-lt);margin-top:10px;text-align:right;font-style:italic;}
+
+    /* ── LIGHTBOX ── */
+    .lbox{position:fixed;inset:0;background:rgba(4,9,18,.93);z-index:2000;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+    .lbox.open{opacity:1;pointer-events:auto;}
+    .lb-img{max-width:90vw;max-height:86vh;object-fit:contain;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.6);}
+    .lb-close{position:absolute;top:18px;right:22px;background:none;border:none;color:rgba(255,255,255,.65);font-size:2.2rem;cursor:pointer;line-height:1;transition:.2s;}
+    .lb-close:hover{color:#fff;}
+    .lb-prev,.lb-next{position:absolute;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.18);color:#fff;font-size:1.6rem;width:50px;height:50px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:.2s;backdrop-filter:blur(6px);}
+    .lb-prev{left:18px;}
+    .lb-next{right:18px;}
+    .lb-prev:hover,.lb-next:hover{background:rgba(255,255,255,.24);}
+    .lb-ctr{position:absolute;bottom:18px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.5);font-size:.8rem;letter-spacing:1.5px;}
+    .lb-caption{position:absolute;bottom:44px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.72);font-size:.82rem;font-style:italic;white-space:nowrap;max-width:80vw;text-align:center;font-family:'Lora',serif;}
+
+    /* ── ARTICLE BODY ── */
+    .art-body{max-width:760px;margin:0 auto;padding:52px 32px 90px;}
+    .art-lead{font-family:'Lora',serif;font-size:1.22rem;line-height:1.78;color:var(--ink);margin-bottom:34px;padding-bottom:34px;border-bottom:1px solid var(--border);}
+    .art-body h3{font-family:'Playfair Display',serif;font-size:1.62rem;font-weight:700;color:var(--navy);margin:42px 0 16px;line-height:1.25;}
+    .art-body h4{font-family:'Playfair Display',serif;font-size:1.28rem;font-weight:600;color:var(--navy);margin:30px 0 12px;padding-left:16px;border-left:3px solid var(--terra);}
+    .art-body h5{font-size:.82rem;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--terra);margin:24px 0 8px;}
+    .art-body p{font-family:'Lora',serif;font-size:1.04rem;line-height:1.85;color:var(--ink-mid);margin-bottom:18px;}
+    .art-body strong{color:var(--ink);font-weight:600;}
+    .art-body em{font-style:italic;}
+    .hl-box{background:var(--parchment);border-left:4px solid var(--gold);border-radius:0 10px 10px 0;padding:20px 24px;margin:28px 0;font-family:'Lora',serif;font-style:italic;color:#6b4d2a;font-size:1rem;line-height:1.7;}
+    .info-grid{background:var(--navy);border-radius:12px;padding:28px 32px;margin:32px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;}
+    .ii{font-size:.83rem;color:rgba(255,255,255,.72);line-height:1.55;}
+    .ii strong{color:var(--gold)!important;font-weight:600;display:block;font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:2px;}
+    .art-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:48px;padding-top:32px;border-top:1px solid var(--border);}
+    .art-tag{background:var(--parchment);border:1px solid var(--border);color:var(--ink-mid);font-size:.73rem;padding:5px 14px;border-radius:50px;}
+
+    /* ── ABOUT ── */
+    .about-strip{background:var(--navy);color:#fff;padding:80px 40px;}
+    .about-in{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;}
+    .about-txt h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;line-height:1.2;margin-bottom:18px;}
+    .about-txt h2 em{color:var(--gold);font-style:italic;}
+    .about-txt p{font-family:'Lora',serif;color:rgba(255,255,255,.7);font-size:1rem;line-height:1.8;font-style:italic;}
+    .about-feats{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+    .fc{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:20px;}
+    .fc .fi{font-size:1.5rem;margin-bottom:10px;display:block;}
+    .fc h3{font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;color:#fff;margin-bottom:6px;}
+    .fc p{font-size:.78rem;color:rgba(255,255,255,.5);line-height:1.5;}
+
+    /* ── CONTACT ── */
+    #contact{padding:90px 40px 100px;background:var(--cream);}
+    .con-in{max-width:680px;margin:0 auto;text-align:center;}
+    .con-in h2{font-family:'Playfair Display',serif;font-size:clamp(2rem,4vw,2.8rem);font-weight:700;color:var(--navy);margin-bottom:14px;}
+    .con-in>p{font-family:'Lora',serif;font-style:italic;color:var(--ink-mid);font-size:1rem;margin-bottom:44px;line-height:1.7;}
+    .con-form{text-align:left;display:flex;flex-direction:column;gap:18px;}
+    .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+    .fg{display:flex;flex-direction:column;gap:5px;}
+    .fg label{font-size:.72rem;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--ink-mid);}
+    .fg input,.fg textarea{padding:12px 16px;border:1.5px solid var(--border);border-radius:8px;font-family:'DM Sans',sans-serif;font-size:.94rem;color:var(--ink);background:var(--white);transition:.2s;}
+    .fg input:focus,.fg textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(13,31,53,.08);}
+    .fg textarea{min-height:140px;resize:vertical;}
+    .con-submit{align-self:flex-start;background:var(--navy);color:#fff;padding:13px 34px;border-radius:8px;border:none;font-family:'DM Sans',sans-serif;font-weight:600;font-size:.93rem;cursor:pointer;transition:.25s var(--ease);}
+    .con-submit:hover{background:#1a3554;transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,31,53,.3);}
+    .con-info{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:38px;padding-top:32px;border-top:1px solid var(--border);}
+    .ci-item{display:flex;align-items:center;gap:8px;font-size:.83rem;color:var(--ink-lt);}
+    .ci-ico{width:30px;height:30px;background:var(--parchment);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.85rem;}
+
+    /* ── FOOTER ── */
+    footer{background:#090f1a;color:rgba(255,255,255,.42);text-align:center;padding:30px 24px;font-size:.8rem;border-top:1px solid rgba(255,255,255,.06);}
+    footer strong{color:rgba(255,255,255,.68);}
+    .footer-links{display:flex;justify-content:center;gap:22px;margin-bottom:12px;}
+    .footer-links a{color:rgba(255,255,255,.38);text-decoration:none;font-size:.76rem;letter-spacing:.4px;transition:.2s;}
+    .footer-links a:hover{color:var(--gold);}
+
+    /* ── TOP BTN ── */
+    .top-btn{position:fixed;bottom:26px;right:26px;width:42px;height:42px;background:var(--terra);color:#fff;border:none;border-radius:50%;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(191,91,56,.4);opacity:0;pointer-events:none;transition:.3s var(--ease);z-index:800;}
+    .top-btn.show{opacity:1;pointer-events:auto;}
+    .top-btn:hover{transform:translateY(-3px);}
+
+    /* ── TOAST ── */
+    .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);background:var(--navy);color:#fff;padding:11px 22px;border-radius:8px;font-size:.86rem;font-weight:500;opacity:0;transition:.3s;pointer-events:none;z-index:9999;white-space:nowrap;box-shadow:var(--sh-md);}
+    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:1024px){
+      .cards-grid{grid-template-columns:repeat(2,1fr);}
+      .featured-card{height:420px;}
+    }
+    @media(max-width:960px){
+      .about-in{grid-template-columns:1fr;gap:40px;}
+    }
+    @media(max-width:640px){
+      .navbar{padding:0 18px;}
+      #blog-index{padding:60px 18px 80px;}
+      .cards-grid{grid-template-columns:1fr;}
+      .featured-card{height:340px;}
+      .f-content{padding:24px 22px 26px;}
+      .f-excerpt{display:none;}
+      .hero-stats{display:none;}
+      .art-ht{padding:24px 20px 34px;}
+      .art-body{padding:36px 18px 80px;}
+      .gallery-sec{padding:40px 18px 8px;}
+      .mosaic{grid-template-columns:1fr 1fr;}
+      .m-cell:nth-child(1){grid-column:1;grid-row:1;height:160px;}
+      .m-cell:nth-child(2){grid-column:2;grid-row:1;height:160px;}
+      .m-cell:nth-child(3){grid-column:1/3;grid-row:2;height:160px;}
+      .m-cell:nth-child(4){grid-column:1;grid-row:3;height:160px;}
+      .m-cell:nth-child(5){grid-column:2;grid-row:3;height:160px;}
+      .form-row{grid-template-columns:1fr;}
+      .about-feats{grid-template-columns:1fr;}
+      #contact{padding:60px 18px 80px;}
+      .nav-links{display:none;}
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand" onclick="closeArticle();window.scrollTo({top:0,behavior:'smooth'})">
+    <div class="brand-icon">✦</div>
+    <div class="brand-text">UK Travel Stories<span class="brand-sub">Discover Britain</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#" onclick="closeArticle();window.scrollTo({top:0,behavior:'smooth'});return false;">Home</a></li>
+    <li><a href="#blog-index" onclick="closeArticle()">Stories</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact" class="nav-cta">Contact Us</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-ov"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">✦ &nbsp; Britain's Finest Travel Journal &nbsp; ✦</div>
+    <h1 class="hero-title">Discover the <em>Soul</em><br>of Great Britain</h1>
+    <p class="hero-sub">From mist-covered Scottish Highlands to honey-stoned Georgian streets —<br>every corner of this island holds a story worth telling.</p>
+    <div class="hero-acts">
+      <a href="#blog-index" class="btn-p">Read Our Stories →</a>
+      <a href="#about" class="btn-g">About the Journal</a>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-line"></div><span>scroll</span></div>
+  <div class="hero-stats">
+    <div class="hstat"><span class="snum">5</span><span class="slbl">Destinations</span></div>
+    <div class="hstat"><span class="snum">25</span><span class="slbl">Photos</span></div>
+    <div class="hstat"><span class="snum">2,000+</span><span class="slbl">Years of History</span></div>
+    <div class="hstat"><span class="snum">∞</span><span class="slbl">Adventures Await</span></div>
+  </div>
+</section>
+
+<!-- BLOG INDEX -->
+<section id="blog-index">
+  <div class="idx-hdr">
+    <div class="tag-pill">✦ Latest Stories</div>
+    <h2>Journeys Across the British Isles</h2>
+    <p>Five iconic destinations, each with its own magic. Click any story to read the full account and explore five stunning photographs from each place.</p>
+  </div>
+
+  <div class="sec-lbl"><span>Featured Story</span></div>
+
+  <!-- FEATURED CARD — full width, image + text overlay -->
+  <article class="featured-card" onclick="openArticle(0)">
+    <img src="./tower.webp" alt="Tower of London" class="f-img" fetchpriority="high"/>
+    <div class="f-overlay"></div>
+    <div class="f-badge-row">
+      <span class="f-badge">🏰 Historic Landmark</span>
+      <span class="f-num">01 / 05 &nbsp;·&nbsp; 8 min read</span>
+    </div>
+    <div class="f-content">
+      <div class="f-meta">
+        <span>📍 London, England</span>
+        <span class="f-dot"></span>
+        <span>8 min read</span>
+        <span class="f-dot"></span>
+        <span>5 photos inside</span>
+      </div>
+      <h2 class="f-title">The Tower of London: A Fortress at the Heart of History</h2>
+      <p class="f-excerpt">Rising dramatically from the north bank of the Thames, the Tower of London has served as a royal palace, prison, and keeper of the Crown Jewels for over 900 years — each stone steeped in extraordinary history.</p>
+      <div class="f-footer">
+        <span class="f-read">Read Full Story →</span>
+        <span class="f-loc">📍 City of London, England</span>
+      </div>
+    </div>
+  </article>
+
+  <div class="sec-lbl" style="margin-top:48px;"><span>More Stories</span></div>
+
+  <!-- 4-CARD EQUAL GRID -->
+  <div class="cards-grid">
+
+    <!-- Edinburgh -->
+    <article class="blog-card" onclick="openArticle(1)">
+      <div class="c-img-wrap">
+        <img src="https://images.unsplash.com/photo-1506377247377-2a5b3b417ebb?w=700&q=80&fit=crop" alt="Edinburgh" class="c-img" loading="lazy"/>
+        <span class="c-badge">🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scottish Icon</span>
+        <span class="c-num">02 / 05</span>
+      </div>
+      <div class="c-body">
+        <div class="c-meta"><span>📍 Edinburgh, Scotland</span><span class="dot"></span><span>7 min</span><span class="dot"></span><span>5 photos</span></div>
+        <h2 class="c-title">Edinburgh: Scotland's Majestic Capital</h2>
+        <div class="c-foot">
+          <span class="read-more">Read Story <span class="rarr">↗</span></span>
+          <span class="c-loc">Scotland</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Stonehenge -->
+    <article class="blog-card" onclick="openArticle(2)">
+      <div class="c-img-wrap">
+        <img src="./stone.webp" alt="Stonehenge" class="c-img" loading="lazy">
+        <span class="c-badge">🌀 Ancient Wonder</span>
+        <span class="c-num">03 / 05</span>
+      </div>
+      <div class="c-body">
+        <div class="c-meta"><span>📍 Wiltshire, England</span><span class="dot"></span><span>6 min</span><span class="dot"></span><span>5 photos</span></div>
+        <h2 class="c-title">Stonehenge: The Eternal Mystery of the Plains</h2>
+        <div class="c-foot">
+          <span class="read-more">Read Story <span class="rarr">↗</span></span>
+          <span class="c-loc">Wiltshire</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Lake District -->
+    <article class="blog-card" onclick="openArticle(3)">
+      <div class="c-img-wrap">
+        <img src="./lake.webp" alt="Lake District" class="c-img" loading="lazy">
+        <span class="c-badge">⛰️ Natural Beauty</span>
+        <span class="c-num">04 / 05</span>
+      </div>
+      <div class="c-body">
+        <div class="c-meta"><span>📍 Cumbria, England</span><span class="dot"></span><span>7 min</span><span class="dot"></span><span>5 photos</span></div>
+        <h2 class="c-title">The Lake District: England's Most Beloved Wilderness</h2>
+        <div class="c-foot">
+          <span class="read-more">Read Story <span class="rarr">↗</span></span>
+          <span class="c-loc">Cumbria</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Bath -->
+    <article class="blog-card" onclick="openArticle(4)">
+      <div class="c-img-wrap">
+        <img src="https://images.unsplash.com/photo-1521106581851-da5b6457f674?w=700&q=80&fit=crop" alt="Bath" class="c-img" loading="lazy"/>
+        <span class="c-badge">🏛️ Georgian Elegance</span>
+        <span class="c-num">05 / 05</span>
+      </div>
+      <div class="c-body">
+        <div class="c-meta"><span>📍 Bath, Somerset</span><span class="dot"></span><span>7 min</span><span class="dot"></span><span>5 photos</span></div>
+        <h2 class="c-title">Bath: Where Roman History Meets Georgian Splendour</h2>
+        <div class="c-foot">
+          <span class="read-more">Read Story <span class="rarr">↗</span></span>
+          <span class="c-loc">Somerset</span>
+        </div>
+      </div>
+    </article>
+
+  </div><!-- /cards-grid -->
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="about-strip">
+  <div class="about-in">
+    <div class="about-txt">
+      <h2>A Journal Born from <em>Wanderlust</em></h2>
+      <p>UK Travel Stories is an independent travel journal dedicated to capturing the spirit of the British Isles — from ancient stone circles to Georgian crescents, from highland lochs to royal fortresses. Every place has a story that deserves to be told with care, depth, and genuine wonder.</p>
+    </div>
+    <div class="about-feats">
+      <div class="fc"><span class="fi">🗺️</span><h3>Curated Destinations</h3><p>Handpicked locations blending history, nature, and cultural richness.</p></div>
+      <div class="fc"><span class="fi">✍️</span><h3>In-Depth Writing</h3><p>Long-form stories that go beyond the tourist brochure.</p></div>
+      <div class="fc"><span class="fi">📸</span><h3>Visual Storytelling</h3><p>Five curated photographs per destination, from different angles.</p></div>
+      <div class="fc"><span class="fi">🧭</span><h3>Practical Guidance</h3><p>Real visitor tips so you can plan your own adventure.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="con-in">
+    <h2>Share Your Story</h2>
+    <p>Have a hidden gem to recommend? A travel tale to share? We'd love to hear from you.</p>
+    <form class="con-form" onsubmit="handleSubmit(event)">
+      <div class="form-row">
+        <div class="fg"><label>Your Name</label><input type="text" id="c-name" placeholder="e.g. Emily Watson" required/></div>
+        <div class="fg"><label>Email Address</label><input type="email" id="c-email" placeholder="e.g. emily@example.com" required/></div>
+      </div>
+      <div class="fg"><label>Subject</label><input type="text" placeholder="What's on your mind?"/></div>
+      <div class="fg"><label>Your Message</label><textarea id="c-msg" placeholder="Tell us your thoughts, suggestions, or travel tales…" required></textarea></div>
+      <button type="submit" class="con-submit">Send Message ✉️</button>
+    </form>
+    <div class="con-info">
+      <div class="ci-item"><div class="ci-ico">📧</div>hello@uktravelstories.co.uk</div>
+      <div class="ci-item"><div class="ci-ico">📞</div>+44 (0)20 7946 0123</div>
+      <div class="ci-item"><div class="ci-ico">📍</div>London, United Kingdom</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links"><a href="#">Home</a><a href="#blog-index">Stories</a><a href="#about">About</a><a href="#contact">Contact</a></div>
+  <p>&copy; 2026 <strong>UK Travel Stories</strong>. Crafted with ❤️ for Britain's beauty.</p>
+</footer>
+
+<button class="top-btn" id="topBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+<div class="toast" id="toast"></div>
+
+<!-- LIGHTBOX -->
+<div class="lbox" id="lbox" onclick="lboxBgClose(event)">
+  <button class="lb-close" onclick="closeLbox()">×</button>
+  <button class="lb-prev" onclick="lbNav(-1)">‹</button>
+  <img src="" alt="" class="lb-img" id="lbImg"/>
+  <button class="lb-next" onclick="lbNav(1)">›</button>
+  <div class="lb-caption" id="lbCap"></div>
+  <div class="lb-ctr" id="lbCtr"></div>
+</div>
+
+<!-- ARTICLE OVERLAY -->
+<div class="art-ov" id="artOv">
+  <div class="art-bar">
+    <button class="back-btn" onclick="closeArticle()">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M19 12H5"/><path d="m12 5-7 7 7 7"/></svg>
+      Back to Stories
+    </button>
+    <div class="bar-title" id="barTitle"></div>
+    <div class="bar-right">
+      <button class="nav-btn" id="prevBtn" onclick="navArt(-1)">‹ Prev</button>
+      <button class="nav-btn" id="nextBtn" onclick="navArt(1)">Next ›</button>
+      <button class="share-btn" onclick="copyLink()" title="Copy link">🔗</button>
+      <button class="share-btn" onclick="window.print()" title="Print">🖨️</button>
+    </div>
+  </div>
+  <div class="art-hero">
+    <img src="" alt="" class="art-hi" id="artHeroImg"/>
+    <div class="art-ho"></div>
+    <div class="art-ht">
+      <span class="art-cat" id="artCat"></span>
+      <h1 class="art-title" id="artTitle"></h1>
+      <div class="art-byline"><span id="artLoc"></span><span class="sep"></span><span id="artTime"></span><span class="sep"></span><span>May 2026</span></div>
+    </div>
+  </div>
+  <div id="galMount"></div>
+  <div class="art-body" id="artBody"></div>
+</div>
+
+<script>
+// ── DATA ────────────────────────────────────────────────────────
+const DATA = [
+  {
+    title:"The Tower of London: A Fortress at the Heart of History",
+    cat:"🏰 Historic Landmark", loc:"📍 London, England", time:"8 min read",
+    hero:"./tower.webp",
+    tags:["London","History","Medieval","Crown Jewels","UNESCO","Beefeaters"],
+    body:`<p class="art-lead">Rising dramatically from the north bank of the Thames, the Tower of London is one of the world's most iconic medieval fortresses. For over 900 years it has served as a royal palace, a prison of the realm, and the keeper of England's most precious treasures — the Crown Jewels.</p>
+    <h3>A Fortress Born of Conquest</h3>
+    <p>Construction of the <strong>White Tower</strong> was ordered by <strong>William the Conqueror</strong> shortly after his victory at Hastings in 1066. Built to overawe London's citizens and secure Norman power, its walls stand up to <em>4.6 metres thick</em>. Over the following centuries successive monarchs added towers, walls, and a moat, transforming a single keep into an entire fortified complex spanning nearly 5 acres.</p>
+    <h4>The Crown Jewels</h4>
+    <p>The Tower's most dazzling attraction is the <strong>Crown Jewels</strong> — a breathtaking collection of royal regalia used in coronations. The centrepiece is the <em>Imperial State Crown</em>, set with 2,868 diamonds, 17 sapphires, 11 emeralds, 269 pearls, and 4 rubies. Visitors move past on a travelator, allowing every eye to linger on centuries of royal splendour without bottlenecks forming.</p>
+    <h4>The Ravens of the Tower</h4>
+    <p>An ancient legend holds that <em>"if the Tower of London ravens are lost or fly away, the Crown and the Tower itself will fall."</em> Today at least six ravens are kept at all times, tended by the Ravenmaster. Their wings are clipped, but their character is feisty — known to steal sandwiches and mimic human voices with alarming accuracy.</p>
+    <h5>Prisoners & Executions</h5>
+    <p>Among the Tower's most notorious inmates were two of Henry VIII's wives — <strong>Anne Boleyn</strong> and <strong>Catherine Howard</strong> — both executed on Tower Green. The <em>Princes in the Tower</em>, Edward V and his brother Richard, disappeared mysteriously within its walls in 1483, one of history's most enduring royal mysteries.</p>
+    <div class="hl-box">🎩 <strong>Yeoman Warders:</strong> The Tower's famous Beefeaters are retired military veterans who live within the Tower precincts. Their Tudor-era uniforms have barely changed in five centuries. They guide visitors with a mixture of historical knowledge and dry wit that only the British could perfect.</div>
+    <h3>Planning Your Visit</h3>
+    <div class="info-grid">
+      <div class="ii"><strong>Location</strong>Tower Hill, London EC3N 4AB</div>
+      <div class="ii"><strong>Opening Hours</strong>Tue–Sat: 9 AM – 5:30 PM<br>Sun–Mon: 10 AM – 5:30 PM</div>
+      <div class="ii"><strong>Admission</strong>Adults £34.80 / Children £17.40</div>
+      <div class="ii"><strong>Nearest Tube</strong>Tower Hill (Circle & District lines)</div>
+      <div class="ii"><strong>Best Time</strong>Weekday mornings to avoid crowds</div>
+      <div class="ii"><strong>Allow</strong>3–4 hours for a full visit</div>
+    </div>`
+  },
+  {
+    title:"Edinburgh: Scotland's Majestic Capital",
+    cat:"🏴󠁧󠁢󠁳󠁣󠁴󠁿 Scottish Icon", loc:"📍 Edinburgh, Scotland", time:"7 min read",
+    tags:["Edinburgh","Scotland","Castle","Old Town","Fringe Festival","Whisky"],
+    body:`<p class="art-lead">Perched on an ancient volcanic crag, Edinburgh is one of Europe's most dramatically beautiful cities. Its medieval Old Town tumbles down from a brooding castle while the Georgian New Town stretches elegantly below — a city of two faces, and a thousand stories etched in stone.</p>
+    <h3>Edinburgh Castle: The Rock of Ages</h3>
+    <p>No landmark defines Edinburgh more completely than its magnificent castle. Crowning the plug of a long-extinct volcano, <strong>Edinburgh Castle</strong> has been a symbol of Scottish power for over a millennium. Inside, visitors discover the <em>Scottish Crown Jewels</em> — the oldest surviving royal regalia in Britain — and the haunting One O'Clock Gun, fired every day except Sunday since 1861.</p>
+    <h4>The Royal Mile</h4>
+    <p>Running from the Castle Esplanade down to the <strong>Palace of Holyroodhouse</strong>, the Royal Mile is the spine of Edinburgh's Old Town. Every close hides centuries of history — from the <em>Writers' Museum</em> celebrating Burns, Scott, and Stevenson, to Deacon Brodie's Tavern, named after the man who inspired Stevenson to create Dr Jekyll and Mr Hyde.</p>
+    <h4>Arthur's Seat</h4>
+    <p>Rising 251 metres above the city centre, <strong>Arthur's Seat</strong> is an ancient volcano within Holyrood Park, offering one of the finest urban views in all of Europe. The hike takes about 45 minutes from the park gates, rewarding walkers with panoramas spanning the city, the Firth of Forth, and on clear days, the distant peaks of the Highlands.</p>
+    <h5>The Edinburgh Festival Fringe</h5>
+    <p>Every August, Edinburgh transforms into the cultural capital of the world. The <strong>Edinburgh Fringe</strong> — the world's largest arts festival — fills every venue, street corner, and pub with theatre, comedy, dance, and music. Over 3,500 shows across 300 venues: an extraordinary spectacle of human creativity.</p>
+    <div class="hl-box">🥃 <strong>Whisky Trail:</strong> The Scotch Whisky Experience on the Royal Mile offers guided tastings through Scotland's five distinct whisky-producing regions — a warming education in the country's most celebrated export. Sláinte mhath!</div>
+    <h3>Planning Your Visit</h3>
+    <div class="info-grid">
+      <div class="ii"><strong>Castle Admission</strong>Adults £19.50 / Children £11.70</div>
+      <div class="ii"><strong>Castle Hours</strong>Apr–Sep: 9:30 AM – 6 PM<br>Oct–Mar: 9:30 AM – 5 PM</div>
+      <div class="ii"><strong>Best Time</strong>April–June or September–October</div>
+      <div class="ii"><strong>Nearest Station</strong>Edinburgh Waverley (city centre)</div>
+      <div class="ii"><strong>Don't Miss</strong>Camera Obscura rooftop views</div>
+      <div class="ii"><strong>Local Tip</strong>Book castle tickets 2 weeks ahead in summer</div>
+    </div>`
+  },
+  {
+    title:"Stonehenge: The Eternal Mystery of the Plains",
+    cat:"🌀 Ancient Wonder", loc:"📍 Wiltshire, England", time:"6 min read",
+    tags:["Stonehenge","Wiltshire","Prehistoric","UNESCO","Neolithic","Solstice"],
+    body:`<p class="art-lead">Standing sentinel on Salisbury Plain for over 5,000 years, Stonehenge is one of humanity's most enduring and mysterious monuments. These ancient standing stones — arranged with breathtaking precision — continue to provoke wonder, debate, and reverence in all who stand before them.</p>
+    <h3>A Monument of Staggering Ambition</h3>
+    <p>Construction of Stonehenge began around <strong>3000 BC</strong> and continued in multiple phases over 1,500 years. The iconic sarsen stones — some weighing <em>25 tonnes</em> — were transported from Marlborough Downs, nearly 40 kilometres away. The smaller bluestones, each up to 4 tonnes, were carried from the <em>Preseli Hills</em> in Wales, over 250 kilometres distant. How Neolithic peoples moved such enormous stones remains one of archaeology's greatest puzzles.</p>
+    <h4>Aligned with the Cosmos</h4>
+    <p>Stonehenge is aligned with remarkable precision to the movements of the sun. At the <strong>summer solstice</strong>, the rising sun shines directly through the monument's entrance and strikes the <em>Altar Stone</em> at its centre. This celestial orientation suggests the site functioned as a sophisticated astronomical calendar — and a place of seasonal ritual and communal gathering for thousands of years.</p>
+    <h4>A Sacred Landscape</h4>
+    <p>Stonehenge is the centrepiece of an ancient sacred landscape peppered with burial mounds, processional avenues, and related monuments. The nearby site of <strong>Durrington Walls</strong> — once a large Neolithic village — suggests thousands of people gathered here for seasonal celebrations, feasting, and ritual across many generations.</p>
+    <h5>Modern Discoveries</h5>
+    <p>Recent archaeological investigations have transformed our understanding of the site. In 2020, geophysical surveys near <em>Durrington Walls</em> revealed a previously unknown circle of pits, suggesting an even larger ceremonial complex. The stones may also have been preceded by a timber monument, revealing a site in continual use and evolution across millennia.</p>
+    <div class="hl-box">🌅 <strong>Special Stone Circle Access:</strong> English Heritage offers exclusive dawn and dusk experiences, allowing small groups to walk among the stones themselves — an intimacy with the ancient world that regular daytime visits cannot provide. Book months in advance.</div>
+    <h3>Planning Your Visit</h3>
+    <div class="info-grid">
+      <div class="ii"><strong>Location</strong>Amesbury, Wiltshire SP4 7DE</div>
+      <div class="ii"><strong>Opening Hours</strong>9 AM – 7 PM (summer)<br>9 AM – 5 PM (winter)</div>
+      <div class="ii"><strong>Admission</strong>Adults £26.00 / Children £15.60</div>
+      <div class="ii"><strong>Nearest Station</strong>Salisbury (bus/taxi to site)</div>
+      <div class="ii"><strong>Combine With</strong>Old Sarum & Salisbury Cathedral</div>
+      <div class="ii"><strong>Book Ahead</strong>Essential in summer months</div>
+    </div>`
+  },
+  {
+    title:"The Lake District: England's Most Beloved Wilderness",
+    cat:"⛰️ Natural Beauty", loc:"📍 Cumbria, England", time:"7 min read",
+    tags:["Lake District","Cumbria","Hiking","Wordsworth","UNESCO","National Park","Windermere"],
+    body:`<p class="art-lead">A land of shimmering lakes, dramatic fells, and intimate valleys that has inspired poets, painters, and adventurers for centuries — England's largest National Park is a place of extraordinary natural beauty that rewards those who truly step into the landscape.</p>
+    <h3>A UNESCO World Heritage Landscape</h3>
+    <p>The Lake District was granted <strong>UNESCO World Heritage status</strong> in 2017, recognised for its exceptional cultural landscape — the product of 5,000 years of human interaction with a spectacular natural environment. Its 16 principal lakes, dozens of tarns, and 214 "Wainwright" fells (lovingly catalogued by the legendary fellwalker <em>Alfred Wainwright</em>) offer an almost infinite variety of walking experiences.</p>
+    <h4>Scafell Pike: The Roof of England</h4>
+    <p>At <strong>978 metres</strong>, Scafell Pike is the highest mountain in England. The ascent from Wasdale Head is a challenging but immensely rewarding full-day walk across boulder fields and ridgelines. On a clear day, the summit rewards with views stretching to <em>Scotland, Wales, and Ireland</em> — a panorama that makes every step worthwhile.</p>
+    <h4>Wordsworth Country</h4>
+    <p>The Lake District is inseparable from the life and work of <strong>William Wordsworth</strong>. Born in Cockermouth in 1770, he spent most of his life in the region, living at <em>Dove Cottage</em> in Grasmere and later Rydal Mount. The fells, lakes, and valleys that flow through his poetry feel almost tangible when you walk the same paths the poet walked two centuries ago.</p>
+    <h5>Beatrix Potter's World</h5>
+    <p><strong>Beatrix Potter</strong> fell in love with the Lake District as a child and purchased <em>Hill Top Farm</em> in Near Sawrey from the success of her Peter Rabbit books. Now managed by the National Trust, the surrounding landscape provided the settings for many of her beloved tales and illustrations.</p>
+    <div class="hl-box">🚢 <strong>Lake Windermere:</strong> England's largest natural lake stretches 18 kilometres from Ambleside to Newby Bridge. A cruise aboard a Victorian steamboat offers perspectives of the surrounding fells impossible to appreciate from land — particularly magical in the golden light of autumn.</div>
+    <h3>Planning Your Visit</h3>
+    <div class="info-grid">
+      <div class="ii"><strong>Best Base</strong>Ambleside, Keswick, or Windermere</div>
+      <div class="ii"><strong>Best Season</strong>May–Jun or Sep–Oct (best weather)</div>
+      <div class="ii"><strong>Park Entry</strong>Free (car parks may charge)</div>
+      <div class="ii"><strong>Nearest Station</strong>Oxenholme Lake District</div>
+      <div class="ii"><strong>Must-Do Walk</strong>Helm Crag from Grasmere village</div>
+      <div class="ii"><strong>Local Tip</strong>Book accommodation months ahead in summer</div>
+    </div>`
+  },
+  {
+    title:"Bath: Where Roman History Meets Georgian Splendour",
+    cat:"🏛️ Georgian Elegance", loc:"📍 Bath, Somerset", time:"7 min read",
+    tags:["Bath","Somerset","Roman","Georgian","Jane Austen","UNESCO","Spa"],
+    body:`<p class="art-lead">The city of Bath is a jewel in England's crown — a harmonious blend of ancient Roman engineering and exquisite Georgian architecture. The entire city is a UNESCO World Heritage Site, celebrated for its natural hot springs, sweeping crescents, and timeless literary connections to Jane Austen.</p>
+    <h3>The Roman Baths: Steaming Through the Centuries</h3>
+    <p>At the heart of the city lie the <strong>Roman Baths</strong>, one of the best-preserved Roman spa complexes in the world. Built around <em>70 AD</em>, the baths still flow with mineral-rich water from the sacred spring of <strong>Sulis Minerva</strong>. The Great Bath, lined with lead and surrounded by a restored Roman pavement, is a mesmerising sight: steam rising from green-tinted waters transports visitors back nearly two millennia.</p>
+    <h4>The Royal Crescent</h4>
+    <p>The <strong>Royal Crescent</strong> is arguably the finest example of Georgian architecture in Britain. This sweeping arc of 30 terraced houses, designed by <em>John Wood the Younger</em> in the 1770s, overlooks a vast manicured lawn. Number 1 Royal Crescent is now a museum, furnished exactly as it would have appeared in the late 18th century — a fascinating window into aristocratic life at the height of Bath's fashionable golden age.</p>
+    <h4>The Circus & Pulteney Bridge</h4>
+    <p>Nearby, <strong>The Circus</strong> — a circular arrangement of 33 townhouses inspired by both Stonehenge and the Colosseum — is equally breathtaking. A short walk across the river brings you to <strong>Pulteney Bridge</strong>, one of only a handful of bridges in the world lined with shops on both sides, and a perfect spot to admire the pale Bath stone glowing in afternoon light.</p>
+    <h5>Jane Austen's Bath</h5>
+    <p><strong>Jane Austen</strong> lived in Bath from 1801 to 1806, and the city features prominently in <em>Northanger Abbey</em> and <em>Persuasion</em>. The Jane Austen Centre on Gay Street celebrates her life and works with costumed guides and a charming Regency tea room.</p>
+    <div class="hl-box">🍞 <strong>Sally Lunn Bun:</strong> Don't leave Bath without trying a Sally Lunn Bun — a large brioche-like bun baked to a secret 17th-century recipe. Visit Sally Lunn's Historic Eating House, one of Bath's oldest buildings, and order it with cinnamon butter and a pot of Earl Grey. Pure perfection.</div>
+    <h3>Planning Your Visit</h3>
+    <div class="info-grid">
+      <div class="ii"><strong>Roman Baths</strong>Abbey Church Yard, Bath BA1 1LZ</div>
+      <div class="ii"><strong>Baths Hours</strong>9:00 AM – 5 PM daily<br>(extended July–August)</div>
+      <div class="ii"><strong>Admission</strong>Adults £27.50 (weekend)<br>Adults £25.00 (weekday)</div>
+      <div class="ii"><strong>Nearest Station</strong>Bath Spa (from London Paddington)</div>
+      <div class="ii"><strong>London Journey</strong>~90 minutes by train</div>
+      <div class="ii"><strong>Don't Miss</strong>Thermae Bath Spa rooftop pool</div>
+    </div>`
+  }
+];
+
+// ── STATE ────────────────────────────────────────────────────────
+let curArt = -1, lbImgs = [], lbCaps = [], lbIdx = 0;
+
+// ── OPEN ARTICLE ─────────────────────────────────────────────────
+function openArticle(i) {
+  const a = DATA[i]; curArt = i;
+  document.getElementById('artHeroImg').src = a.hero;
+  document.getElementById('artCat').textContent   = a.cat;
+  document.getElementById('artTitle').textContent  = a.title;
+  document.getElementById('artLoc').textContent    = a.loc;
+  document.getElementById('artTime').textContent   = a.time;
+  document.getElementById('barTitle').textContent  = a.title;
+  document.getElementById('prevBtn').disabled = i === 0;
+  document.getElementById('nextBtn').disabled = i === DATA.length - 1;
+
+  // Gallery
+  lbImgs = a.gallery.map(g=>g.src);
+  lbCaps = a.gallery.map(g=>g.cap);
+  const cells = a.gallery.map((g,idx)=>`
+    <div class="m-cell" onclick="openLbox(${idx})">
+      <img src="${g.src}" alt="${g.cap}" class="m-img" loading="lazy"/>
+    </div>`).join('');
+  document.getElementById('galMount').innerHTML = `
+    <div class="gallery-sec">
+      <h2 class="gal-head">📷 Photo Gallery</h2>
+      <p class="gal-sub">Five perspectives on this remarkable destination — click any image to view full screen</p>
+      <div class="mosaic">${cells}</div>
+      <p class="gal-cap">Photo 1 of 5 — ${a.gallery[0].cap}</p>
+    </div>`;
+
+  // Body + tags
+  const tags = a.tags.map(t=>`<span class="art-tag">${t}</span>`).join('');
+  document.getElementById('artBody').innerHTML = a.body + `<div class="art-tags">${tags}</div>`;
+
+  const ov = document.getElementById('artOv');
+  ov.scrollTop = 0;
+  ov.classList.add('open');
+  document.body.style.overflow = 'hidden';
+
+  const bt = document.getElementById('barTitle');
+  ov.onscroll = () => bt.classList.toggle('vis', ov.scrollTop > 320);
+}
+
+function closeArticle() {
+  document.getElementById('artOv').classList.remove('open');
+  document.body.style.overflow = ''; curArt = -1;
+}
+function navArt(d) { const n = curArt+d; if(n>=0&&n<DATA.length) openArticle(n); }
+
+// ── LIGHTBOX ─────────────────────────────────────────────────────
+function openLbox(idx) {
+  lbIdx = idx; renderLbox();
+  document.getElementById('lbox').classList.add('open');
+}
+function renderLbox() {
+  document.getElementById('lbImg').src  = lbImgs[lbIdx];
+  document.getElementById('lbCap').textContent = lbCaps[lbIdx];
+  document.getElementById('lbCtr').textContent = `${lbIdx+1} / ${lbImgs.length}`;
+}
+function closeLbox() { document.getElementById('lbox').classList.remove('open'); }
+function lboxBgClose(e) { if(e.target===document.getElementById('lbox')) closeLbox(); }
+function lbNav(d) { lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length; renderLbox(); }
+
+// ── UTILS ────────────────────────────────────────────────────────
+function copyLink(){ navigator.clipboard.writeText(window.location.href).then(()=>toast('Link copied! 🔗')); }
+function toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),3200); }
+function handleSubmit(e){ e.preventDefault(); const n=document.getElementById('c-name').value.trim(); if(n){toast(`Thank you, ${n}! We'll be in touch 🇬🇧`); e.target.reset();} }
+
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>20);
+  document.getElementById('topBtn').classList.toggle('show',window.scrollY>500);
+});
+
+document.addEventListener('keydown',e=>{
+  const lbOpen = document.getElementById('lbox').classList.contains('open');
+  if(lbOpen){ if(e.key==='ArrowRight')lbNav(1); if(e.key==='ArrowLeft')lbNav(-1); if(e.key==='Escape')closeLbox(); return; }
+  if(e.key==='Escape') closeArticle();
+  if(e.key==='ArrowRight'&&curArt>=0) navArt(1);
+  if(e.key==='ArrowLeft'&&curArt>=0)  navArt(-1);
+});
+</script>
+</body>
+</html>
